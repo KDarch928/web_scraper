@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 
 // Using the Schema constructor, create a new comment
 var CommentSchema = new Schema({
-    comment: String
+    title: String
 });
 
 // This creates our model from the above schema

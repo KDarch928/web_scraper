@@ -22,7 +22,7 @@ var ArticleSchema = new Schema({
     //comment is an object that stores a comment id
     comment: {
         type: Schema.Types.ObjectId,
-        ref: "Commment"
+        ref: "Comment"
     }
 });
 

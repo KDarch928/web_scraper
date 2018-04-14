@@ -29,15 +29,14 @@
                     <div id="comment">
                         <textarea id="bobyinput" name="comment"></textarea>
                         <br>
-                        <button data-id="{{_id}}" id="savecomment">Comment</button>
+                        <button data-id="{{_id}}" class="btn btn-info" id="savecomment">Submit A Comment</button>
                         <br>
-                        <div>
-                            {{#if comment}}
-                            <p class="card-text">
-                                {{comment.comment}}
-                            </p>
-                            {{/if}}
-                        </div>
+                        <form action="/articles/{{_id}}" method="GET">
+                            <button type="submit" class="btn btn-info">View Comment</button>
+                        </form>
+                        {{!-- <textarea id="bobyinput" name="comment"></textarea>
+                        <br>
+                        <button data-id="{{_id}}" id="savecomment">Comment</button> --}}
                         <br>
                     </div>
 
