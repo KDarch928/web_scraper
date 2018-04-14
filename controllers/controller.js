@@ -56,8 +56,18 @@ router.get("/scrap", function (req, res) {
     });
 });
 
-router.put("/delete/:id", function(req,res) {
-
+router.delete("/delete/:id", function(req,res) {
+        console.log("comment Id: " + req.params.id);
+        console.log("article Id: " + req.body.artId);
+    db.Comment.remove({
+        _id: req.params.id  
+    })
+    .then(function(dbComment){
+        res.redirect("/articles/" + req.body.artId);
+    })
+    .catch(function(err){
+        res.json(err);
+    });
 });
 
 

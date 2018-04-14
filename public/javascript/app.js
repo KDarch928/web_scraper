@@ -15,3 +15,18 @@ $(document).on("click", "#savecomment", function(){
 
     $("#" + comId + "").val("");
 });
+
+$(document).on("click", "#deletecomment", function(){
+    var commentId = $(this).attr("data-id");
+    var articleId = $(this).val();
+
+    $.ajax({
+        method: "DELETE",
+        url: "/delete/" + commentId,
+        data: {
+            artId: articleId
+        }
+    }).then(function(data){
+
+    });
+})
