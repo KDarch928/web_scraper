@@ -2,13 +2,8 @@ var express = require("express");
 
 var router = express.Router();
 // Our scraping tools
-// Axios is a promised-based http library, similar to jQuery's Ajax method
-// It works on the client and on the server
-// var axios = require("axios");
 var request = require("request");
 var cheerio = require("cheerio");
-var mongoose = require("mongoose");
-
 
 // Require all models
 var db = require("../models/index");
@@ -35,19 +30,11 @@ router.get("/scrape", function (req, res) {
         // Then, we load that into cheerio and save it to $ for a shorthand selector
         var $ = cheerio.load(html);
 
-        // Now, we grab every h2 within an article tag, and do the following:
+        // Now, we grab every post-cont classes within an article, and do the following:
         $(".post-cont").each(function (i, element) {
             // Save an empty result object
             var result = {};
             var wiredUrl = "https://www.itworld.com";
-
-            // Add the text and href of every link, and save them as properties of the result object
-            // result.title = $(this)
-            //   .children("a")
-            //   .text();
-            // result.link = $(this)
-            //   .children("a")
-            //   .attr("href");
 
             result.title = $(this).children("h3").text();
             result.summary = $(this).children("h4").text();
