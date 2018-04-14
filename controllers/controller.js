@@ -107,6 +107,10 @@ router.get("/articles/:id", function (req, res) {
         });
 });
 
+router.get("/home", function(req, res){
+    res.redirect("/");
+})
+
 // Route for saving/updating an Article's associated Note
 router.post("/articles/:id", function (req, res) {
 
@@ -127,8 +131,8 @@ router.post("/articles/:id", function (req, res) {
         })
         .then(function (dbArticle) {
             // If we were able to successfully update an Article, send it back to the client
-            res.json(dbArticle);
-            // return res.redirect("/");
+            // res.json(dbArticle);
+            res.redirect("/");
             console.log(dbArticle);
         })
         .catch(function (err) {
