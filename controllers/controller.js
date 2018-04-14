@@ -10,8 +10,6 @@ var db = require("../models/index");
 
 // Routing
 
-
-
 router.get("/", function (req, res) {
     db.Article.find({})
         .then(function (dbArticle) {
@@ -23,8 +21,9 @@ router.get("/", function (req, res) {
             res.json(err);
         });
 });
+
 // A GET route for scraping the echoJS website
-router.get("/scrape", function (req, res) {
+router.get("/scrap", function (req, res) {
     // First, we grab the body of the html with request
     request("https://www.itworld.com/news/", function (err, response, html) {
         // Then, we load that into cheerio and save it to $ for a shorthand selector
@@ -44,9 +43,7 @@ router.get("/scrape", function (req, res) {
             // Create a new Article using the `result` object built from scraping
             db.Article.create(result)
                 .then(function (dbArticle) {
-                    // View the added result in the console
-                    console.log(dbArticle);
-                    // res.redirect("/");
+                
                 })
                 .catch(function (err) {
                     // If an error occurred, send it to the client
@@ -55,9 +52,12 @@ router.get("/scrape", function (req, res) {
         });
 
         // If we were able to successfully scrape and save an Article, send a message to the client
-        // res.send("Scrape Complete");
         res.redirect("/");
     });
+});
+
+router.put("/delete/:id", function(req,res) {
+
 });
 
 
@@ -84,8 +84,6 @@ router.get("/articles/:id", function (req, res) {
         // ..and populate all of the notes associated with it
         .populate("comment")
         .then(function (dbArticle) {
-            // If we were able to successfully find an Article with the given id, send it back to the client
-            // res.json(dbArticle);
             return res.render("comments",dbArticle);
         })
         .catch(function (err) {
@@ -118,9 +116,7 @@ router.post("/articles/:id", function (req, res) {
         })
         .then(function (dbArticle) {
             // If we were able to successfully update an Article, send it back to the client
-            // res.json(dbArticle);
             res.redirect("/");
-            console.log(dbArticle);
         })
         .catch(function (err) {
             // If an error occurred, send it to the client

@@ -2,14 +2,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 
-// // Our scraping tools
-// var cheerio = require("cheerio");
-// var request = require("request");
-
-// Require all models
-// var db = require("./models");
-
-var PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT || 3010;
 
 // Initialize Express
 var app = express();
@@ -20,17 +13,17 @@ var exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({
     defaultLayout: "main"
 }));
+
 app.set("view engine", "handlebars");
 
 // Use body-parser for handling form submissions
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+
 // Use express.static to serve the public folder as a static directory
 app.use(express.static("public"));
 
-// // Connect to the Mongo DB
-// mongoose.connect("mongodb://localhost/webscraperdb");
 
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/itnewsdb";
